@@ -16,7 +16,58 @@
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid>
-        <ui:TextBlock>Release Page</ui:TextBlock>
-    </Grid>
+    <StackPanel>
+        <Menu Height="60" VerticalAlignment="Top">
+            <ui:MenuItem Header="选择项目" Icon="{ui:SymbolIcon DesktopCursor24}" />
+            <ui:MenuItem Header="刷新列表" Icon="{ui:SymbolIcon ArrowCounterclockwise24}" />
+            <ui:MenuItem Header="一键更新" Icon="{ui:SymbolIcon FolderArrowUp24}" />
+        </Menu>
+        <Grid Margin="10,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="9*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="4">
+                项目地址:
+            </TextBlock>
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="4">
+                C://XXXX
+            </TextBlock>
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="4">
+                当前分支:
+            </TextBlock>
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="4">
+                master
+            </TextBlock>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="4">
+                当前版本:
+            </TextBlock>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="4">
+                satewfsadfdfafsdafdf (2023/9/15 17:55:50)
+            </TextBlock>
+        </Grid>
+    </StackPanel>
 </Page>
