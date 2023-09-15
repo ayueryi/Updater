@@ -4,19 +4,22 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0-windows</TargetFramework>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <ApplicationIcon>Assets\logo.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\app-light.ico</ApplicationIcon>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\logo.png" />
+    <None Remove="Assets\app-dark.ico" />
+    <None Remove="Assets\app-dark.png" />
+    <None Remove="Assets\app-light.ico" />
+    <None Remove="Assets\app-light.png" />
     <None Remove="Assets\papper.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Assets\logo.ico" />
+    <Content Include="Assets\app-light.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,11 +29,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Assets\logo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Resource Include="Assets\app-dark.ico" />
+    <Resource Include="Assets\app-dark.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\app-light.ico" />
+    <Resource Include="Assets\app-light.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Assets\papper.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
 

@@ -41,9 +41,8 @@
             <TextBlock
                 Grid.Row="0"
                 Grid.Column="1"
-                Margin="4">
-                C://XXXX
-            </TextBlock>
+                Margin="4"
+                Text="{Binding ViewModel.ProjectUrl}" />
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="0"
@@ -53,9 +52,8 @@
             <TextBlock
                 Grid.Row="1"
                 Grid.Column="1"
-                Margin="4">
-                master
-            </TextBlock>
+                Margin="4"
+                Text="{Binding ViewModel.ProjectBranch}" />
             <TextBlock
                 Grid.Row="2"
                 Grid.Column="0"
@@ -65,9 +63,8 @@
             <TextBlock
                 Grid.Row="2"
                 Grid.Column="1"
-                Margin="4">
-                satewfsadfdfafsdafdf (2023/9/15 17:55:50)
-            </TextBlock>
+                Margin="4"
+                Text="{Binding ViewModel.ProjectBranchHash}" />
         </Grid>
     </StackPanel>
 </Page>

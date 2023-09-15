@@ -28,7 +28,11 @@ namespace Updater
         // https://docs.microsoft.com/dotnet/core/extensions/logging
         private static readonly IHost _host = Host
             .CreateDefaultBuilder()
-            .ConfigureAppConfiguration(c => { c.SetBasePath(Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location)); })
+            .ConfigureAppConfiguration(c => 
+            {
+                string basePath = Path.GetDirectoryName(Assembly.GetEntryAssembly()!.Location) ?? throw new Exception("无法获取当前程序集入口");
+                c.SetBasePath(basePath);
+            })
             .ConfigureServices((context, services) =>
             {
                 services.AddHostedService<ApplicationHostService>();
@@ -55,7 +59,7 @@ namespace Updater
         public static T GetService<T>()
             where T : class
         {
-            return _host.Services.GetService(typeof(T)) as T;
+            return _host.Services.GetService(typeof(T)) as T ?? throw new Exception("无法获取注入的对象");
         }
 
         /// <summary>

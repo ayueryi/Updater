@@ -1,4 +1,8 @@
-﻿using Wpf.Ui.Controls;
+﻿using System.Windows.Media.Imaging;
+
+using Updater.Views.Windows;
+
+using Wpf.Ui.Controls;
 
 namespace Updater.ViewModels.Pages
 {
@@ -37,6 +41,8 @@ namespace Updater.ViewModels.Pages
         [RelayCommand]
         private void OnChangeTheme(string parameter)
         {
+            var MainWindow = App.GetService<MainWindow>();
+
             switch (parameter)
             {
                 case "theme_light":
@@ -45,6 +51,7 @@ namespace Updater.ViewModels.Pages
 
                     Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Light);
                     CurrentTheme = Wpf.Ui.Appearance.ApplicationTheme.Light;
+                    MainWindow.TitleBar.Icon = new ImageIcon() { Source = new BitmapImage(new Uri("pack://application:,,,/Assets/app-dark.png")) };
 
                     break;
 
@@ -54,6 +61,7 @@ namespace Updater.ViewModels.Pages
 
                     Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Dark);
                     CurrentTheme = Wpf.Ui.Appearance.ApplicationTheme.Dark;
+                    MainWindow.TitleBar.Icon = new ImageIcon() { Source = new BitmapImage(new Uri("pack://application:,,,/Assets/app-light.png")) };
 
                     break;
             }
