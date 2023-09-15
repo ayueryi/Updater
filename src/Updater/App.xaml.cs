@@ -12,6 +12,8 @@ using Updater.ViewModels.Windows;
 using Updater.Views.Pages;
 using Updater.Views.Windows;
 
+using Wpf.Ui;
+
 namespace Updater
 {
     /// <summary>
@@ -39,8 +41,8 @@ namespace Updater
 
                 services.AddSingleton<DashboardPage>();
                 services.AddSingleton<DashboardViewModel>();
-                services.AddSingleton<DataPage>();
-                services.AddSingleton<DataViewModel>();
+                services.AddSingleton<ReleasePage>();
+                services.AddSingleton<ReleaseViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
             }).Build();

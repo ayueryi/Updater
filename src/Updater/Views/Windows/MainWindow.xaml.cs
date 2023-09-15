@@ -1,10 +1,6 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
-// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
-// All Rights Reserved.
+﻿using Updater.ViewModels.Windows;
 
-using Updater.ViewModels.Windows;
-
+using Wpf.Ui;
 using Wpf.Ui.Controls;
 
 namespace Updater.Views.Windows
@@ -21,7 +17,8 @@ namespace Updater.Views.Windows
             IContentDialogService contentDialogService
         )
         {
-            Wpf.Ui.Appearance.Watcher.Watch(this);
+            Wpf.Ui.Appearance.SystemThemeWatcher.Watch(this);
+            Wpf.Ui.Appearance.ApplicationThemeManager.Apply(Wpf.Ui.Appearance.ApplicationTheme.Dark);
 
             ViewModel = viewModel;
             DataContext = this;

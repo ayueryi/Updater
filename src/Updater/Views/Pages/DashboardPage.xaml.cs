@@ -1,21 +1,20 @@
-﻿// This Source Code Form is subject to the terms of the MIT License.
-// If a copy of the MIT was not distributed with this file, You can obtain one at https://opensource.org/licenses/MIT.
-// Copyright (C) Leszek Pomianowski and WPF UI Contributors.
-// All Rights Reserved.
+﻿using Updater.ViewModels.Pages;
 
-using Updater.ViewModels.Pages;
-
+using Wpf.Ui;
 using Wpf.Ui.Controls;
 
 namespace Updater.Views.Pages
 {
     public partial class DashboardPage : INavigableView<DashboardViewModel>
     {
+        private readonly INavigationService _navigationService;
+
         public DashboardViewModel ViewModel { get; }
 
-        public DashboardPage(DashboardViewModel viewModel)
+        public DashboardPage(DashboardViewModel viewModel, INavigationService navigationService)
         {
             ViewModel = viewModel;
+            _navigationService = navigationService;
             DataContext = this;
 
             InitializeComponent();

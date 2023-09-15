@@ -9,12 +9,152 @@
     Title="DashboardPage"
     d:DataContext="{d:DesignInstance local:DashboardPage,
                                      IsDesignTimeCreatable=False}"
-    d:DesignHeight="450"
+    d:DesignHeight="550"
     d:DesignWidth="800"
     ui:Design.Background="{DynamicResource ApplicationBackgroundBrush}"
     ui:Design.Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     Foreground="{DynamicResource TextFillColorPrimaryBrush}"
     mc:Ignorable="d">
 
-    <Grid VerticalAlignment="Top" />
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+
+            <Border
+                Grid.Row="0"
+                Grid.ColumnSpan="2"
+                Height="200"
+                CornerRadius="8">
+                <Border.Background>
+                    <ImageBrush
+                        ImageSource="pack://application:,,,/Assets/papper.png"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Stretch="UniformToFill" />
+                </Border.Background>
+                <Border CornerRadius="8">
+                    <Border.Background>
+                        <RadialGradientBrush>
+                            <GradientStop Offset="0" Color="#1F000000" />
+                            <GradientStop Offset="1" Color="#4F000000" />
+                        </RadialGradientBrush>
+                    </Border.Background>
+                    <Grid>
+                        <StackPanel
+                            Margin="48,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Background="Transparent">
+                            <ui:TextBlock
+                                FontTypography="Subtitle"
+                                Foreground="#B7FFFFFF"
+                                Text="Updater - auto build tool" />
+                            <ui:TextBlock
+                                FontTypography="Title"
+                                Foreground="#FFFFFFFF"
+                                Text="自动更新 - 工具" />
+                            <ui:TextBlock
+                                FontTypography="BodyStrong"
+                                Foreground="#B7FFFFFF"
+                                Text="Build Fluent experiences on Windows using WPF UI." />
+                        </StackPanel>
+                        <ui:TextBlock
+                            Margin="12"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            FontTypography="Caption"
+                            Foreground="#57FFFFFF"
+                            Text="Created by ziyuhaokun" />
+                    </Grid>
+                </Border>
+            </Border>
+
+            <Grid Grid.Row="1" Margin="0,24,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Margin="5" FontSize="18">现有功能</TextBlock>
+
+                <WrapPanel Grid.Row="1">
+                    <ui:CardAction Margin="4" Command="{Binding ViewModel.CarkClickCommand}">
+                        <ui:CardAction.Icon>
+                            <ui:SymbolIcon
+                                Width="30"
+                                FontSize="30"
+                                Symbol="BranchForkLink24" />
+                        </ui:CardAction.Icon>
+                        <StackPanel>
+                            <ui:TextBlock
+                                Margin="0"
+                                FontTypography="BodyStrong"
+                                Text="发布软件"
+                                TextWrapping="WrapWithOverflow" />
+                            <ui:TextBlock
+                                Appearance="Tertiary"
+                                Text="自动编译更新项目"
+                                TextWrapping="WrapWithOverflow" />
+                        </StackPanel>
+                    </ui:CardAction>
+                </WrapPanel>
+            </Grid>
+
+            <Grid
+                Grid.Row="1"
+                Grid.RowSpan="2"
+                Grid.Column="1"
+                Margin="0,29,10,0">
+                <StackPanel>
+                    <TextBlock FontSize="18">公告</TextBlock>
+                    <TextBlock Margin="0,10,0,0" TextWrapping="Wrap">这是一个用于自动构建实体软件和自动发布更新的平台</TextBlock>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Grid VerticalAlignment="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Margin="20" VerticalAlignment="Bottom">
+                <ui:TextBlock>更新器版本:</ui:TextBlock>
+                <ui:TextBlock>描述文件版本:</ui:TextBlock>
+                <ui:TextBlock>编译器版本:</ui:TextBlock>
+            </StackPanel>
+            <StackPanel
+                Grid.Column="1"
+                Margin="20"
+                VerticalAlignment="Bottom">
+                <ui:TextBlock>1.0.0.0</ui:TextBlock>
+                <ui:TextBlock>1.0.0.0</ui:TextBlock>
+                <ui:TextBlock>.net6.0</ui:TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <ui:Button
+            Width="210"
+            Height="56"
+            Margin="0,0,20,20"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Background="#559ce4"
+            Content="一键编译"
+            CornerRadius="5"
+            FontSize="24">
+            <ui:Button.Icon>
+                <ui:SymbolIcon
+                    Width="30"
+                    FontSize="30"
+                    Symbol="BranchForkLink24" />
+            </ui:Button.Icon>
+        </ui:Button>
+    </Grid>
 </Page>
