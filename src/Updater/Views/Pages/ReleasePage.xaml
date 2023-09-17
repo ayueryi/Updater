@@ -18,9 +18,17 @@
 
     <StackPanel>
         <Menu Height="60" VerticalAlignment="Top">
-            <ui:MenuItem Header="选择项目" Icon="{ui:SymbolIcon DesktopCursor24}" />
+            <ui:MenuItem
+                Command="{Binding ViewModel.OpenFolderClickCommand}"
+                Header="选择项目"
+                Icon="{ui:SymbolIcon DesktopCursor24}" />
             <ui:MenuItem Header="刷新列表" Icon="{ui:SymbolIcon ArrowCounterclockwise24}" />
             <ui:MenuItem Header="一键更新" Icon="{ui:SymbolIcon FolderArrowUp24}" />
+            <ui:MenuItem
+                Margin="120,0,0,0"
+                Command="{Binding ViewModel.CompilationClickCommand}"
+                Header="编译"
+                Icon="{ui:SymbolIcon FolderArrowUp24}" />
         </Menu>
         <Grid Margin="10,10">
             <Grid.ColumnDefinitions>
@@ -66,5 +74,20 @@
                 Margin="4"
                 Text="{Binding ViewModel.ProjectBranchHash}" />
         </Grid>
+        <Border Background="DimGray" CornerRadius="8">
+            <ScrollViewer
+                x:Name="OutPutScrollViewer"
+                MaxHeight="140"
+                VerticalScrollBarVisibility="Auto">
+
+                <ui:TextBlock
+                    x:Name="OutputTextBlock"
+                    Margin="10"
+                    FontSize="10"
+                    Text="{Binding ViewModel.OutPut}"
+                    TextWrapping="Wrap" />
+
+            </ScrollViewer>
+        </Border>
     </StackPanel>
 </Page>

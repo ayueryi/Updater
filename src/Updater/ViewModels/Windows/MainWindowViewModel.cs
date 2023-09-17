@@ -7,7 +7,7 @@ namespace Updater.ViewModels.Windows
     public partial class MainWindowViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string _applicationTitle = "WPF UI - Updater";
+        private string _applicationTitle = "自动构建 - Updater";
 
         [ObservableProperty]
         private ObservableCollection<object> _menuItems = new()

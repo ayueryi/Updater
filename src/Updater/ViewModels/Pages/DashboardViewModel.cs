@@ -11,6 +11,13 @@ namespace Updater.ViewModels.Pages
         public DashboardViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+
+            Utils.Generic.GetVersion(@"C:\\Program Files\\dotnet\\dotnet.exe",
+                                     out string name,
+                                     out string version,
+                                     out string file_version);
+
+            SdkVersion = version;
         }
 
         [RelayCommand]
@@ -18,5 +25,7 @@ namespace Updater.ViewModels.Pages
         {
             _ = _navigationService.Navigate(typeof(ReleasePage));
         }
+
+        [ObservableProperty] private string _sdkVersion;
     }
 }
