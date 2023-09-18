@@ -28,7 +28,13 @@
                 Margin="120,0,0,0"
                 Command="{Binding ViewModel.CompilationClickCommand}"
                 Header="编译"
-                Icon="{ui:SymbolIcon FolderArrowUp24}" />
+                Icon="{ui:SymbolIcon FolderArrowUp24}"
+                IsEnabled="{Binding ViewModel.CanCompile}" />
+            <ui:MenuItem
+                Command="{Binding ViewModel.PackageClickCommand}"
+                Header="打包"
+                Icon="{ui:SymbolIcon BoxArrowUp24}"
+                IsEnabled="{Binding ViewModel.CanPackage}" />
         </Menu>
         <Grid Margin="10,10">
             <Grid.ColumnDefinitions>
@@ -89,5 +95,20 @@
 
             </ScrollViewer>
         </Border>
+        <StackPanel Margin="10" Orientation="Horizontal">
+            <Button Click="CleanOutPut">清理输出</Button>
+        </StackPanel>
+        <StackPanel Margin="10" Orientation="Horizontal">
+            <Label Margin="0,0,10,0" VerticalAlignment="Center">编译配置</Label>
+            <ComboBox x:Name="CompildConfigComboBox" SelectedItem="{Binding ViewModel.CompildConfig}">
+                <ComboBoxItem>Debug</ComboBoxItem>
+                <ComboBoxItem>Release</ComboBoxItem>
+            </ComboBox>
+            <Label Margin="10,0" VerticalAlignment="Center">打包项目</Label>
+            <ComboBox
+                x:Name="CompildProjectComboBox"
+                Margin="10,0"
+                SelectedItem="{Binding ViewModel.CompildProject}" />
+        </StackPanel>
     </StackPanel>
 </Page>

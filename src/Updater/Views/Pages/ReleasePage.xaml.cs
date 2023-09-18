@@ -18,5 +18,10 @@ namespace Updater.Views.Pages
 
             InitializeComponent();
         }
+
+        private void CleanOutPut(object sender, RoutedEventArgs e)
+        {
+            ViewModel.OutPut = string.Empty;
+        }
     }
 }

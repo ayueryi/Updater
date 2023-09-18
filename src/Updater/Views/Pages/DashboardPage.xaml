@@ -139,22 +139,26 @@
             </StackPanel>
         </Grid>
 
-        <ui:Button
-            Width="210"
-            Height="70"
+        <StackPanel
             Margin="0,0,20,20"
             HorizontalAlignment="Right"
             VerticalAlignment="Bottom"
-            Background="#559ce4"
-            Content="一键编译"
-            CornerRadius="5"
-            FontSize="24">
-            <ui:Button.Icon>
-                <ui:SymbolIcon
-                    Width="30"
-                    FontSize="30"
-                    Symbol="BranchForkLink24" />
-            </ui:Button.Icon>
-        </ui:Button>
+            Orientation="Vertical">
+            <Label HorizontalAlignment="Center" FontSize="10">暂无记忆项目</Label>
+            <ui:Button
+                Width="210"
+                Height="70"
+                Background="#559ce4"
+                Content="一键编译"
+                CornerRadius="5"
+                FontSize="24">
+                <ui:Button.Icon>
+                    <ui:SymbolIcon
+                        Width="30"
+                        FontSize="30"
+                        Symbol="BranchForkLink24" />
+                </ui:Button.Icon>
+            </ui:Button>
+        </StackPanel>
     </Grid>
 </Page>
