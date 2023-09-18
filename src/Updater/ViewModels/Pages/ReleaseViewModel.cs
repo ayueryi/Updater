@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Controls;
 using LibGit2Sharp;
 
@@ -34,6 +35,8 @@ namespace Updater.ViewModels.Pages
         /// </summary>
         [ObservableProperty] private string _projectBranchHash = "暂无项目";
 
+        [ObservableProperty] private string _csprojVersion = string.Empty;
+
         /// <summary>
         /// 控制台输出信息
         /// </summary>
@@ -55,6 +58,37 @@ namespace Updater.ViewModels.Pages
         /// 打包项目
         /// </summary>
         [ObservableProperty] private ComboBoxItem? _compildProject;
+
+        partial void OnCompildProjectChanged(ComboBoxItem? value)
+        {
+            var sln_base_dir = Path.GetDirectoryName(ProjectUrl);
+            var csproj_path = Path.Combine(sln_base_dir!, value!.Content.ToString() ?? "");
+            var csproj_dir = Path.GetDirectoryName(csproj_path);
+
+            var Properties_dir = Path.Combine(csproj_dir!, "Properties");
+            if (Directory.Exists(Properties_dir))
+            {
+                var AssemblyInfo_path = Path.Combine(Properties_dir, "AssemblyInfo.cs");
+                string assemblyInfoContent = File.ReadAllText(AssemblyInfo_path);
+
+                // Use a regular expression to extract the AssemblyVersion
+                string pattern = @"\[assembly: AssemblyVersion\(""(\d+\.\d+\.\d+\.\d+)""\)\]";
+                Match match = Regex.Match(assemblyInfoContent, pattern);
+
+                if (match.Success)
+                {
+                    string versionString = match.Groups[1].Value;
+                    System.Version version = new System.Version(versionString);
+                    CsprojVersion = version.ToString();
+                    Debug.WriteLine("Assembly Version: " + version);
+                }
+                else
+                {
+                    CsprojVersion = "not found";
+                    Debug.WriteLine("Assembly version not found in AssemblyInfo.cs");
+                }
+            }
+        }
 
         [RelayCommand]
         private void OnOpenFolderClick()
@@ -109,12 +143,15 @@ namespace Updater.ViewModels.Pages
         }
 
         [RelayCommand]
-        private void OnCompilationClick()
+        private async Task OnCompilationClick()
         {
             CanCompile = false;
             CanPackage = false;
 
-            Build();
+            await Task.Run(async () =>
+            {
+                await Build();
+            });
 
             CanCompile = true;
             CanPackage = true;
@@ -157,6 +194,7 @@ namespace Updater.ViewModels.Pages
             if (Directory.Exists(output_dir))
             {
                 string zipFilePath = $"./output/{project_name}.zip"; // 压缩包输出路径
+                if (!Directory.Exists("./output")) Directory.CreateDirectory("./output");
                 if (File.Exists(zipFilePath))
                 {
                     File.Delete(zipFilePath);
