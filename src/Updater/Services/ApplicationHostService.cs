@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Updater.ViewModels.Pages;
 using Updater.Views.Pages;
 using Updater.Views.Windows;
 
@@ -33,6 +34,7 @@ namespace Updater.Services
         /// <param name="cancellationToken">Indicates that the shutdown process should no longer be graceful.</param>
         public async Task StopAsync(CancellationToken cancellationToken)
         {
+            App.GetService<ReleaseViewModel>().SaveConfig();
             await Task.CompletedTask;
         }
 

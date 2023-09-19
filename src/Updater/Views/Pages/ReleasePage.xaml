@@ -29,12 +29,17 @@
                 Command="{Binding ViewModel.CompilationClickCommand}"
                 Header="编译"
                 Icon="{ui:SymbolIcon FolderArrowUp24}"
-                IsEnabled="{Binding ViewModel.CanCompile}" />
+                IsEnabled="{Binding ViewModel.CanEdit}" />
             <ui:MenuItem
                 Command="{Binding ViewModel.PackageClickCommand}"
                 Header="打包"
                 Icon="{ui:SymbolIcon BoxArrowUp24}"
-                IsEnabled="{Binding ViewModel.CanPackage}" />
+                IsEnabled="{Binding ViewModel.CanEdit}" />
+            <ui:MenuItem
+                Command="{Binding ViewModel.ReleaseSoftwareClickCommand}"
+                Header="发布"
+                Icon="{ui:SymbolIcon Send24}"
+                IsEnabled="{Binding ViewModel.CanEdit}" />
         </Menu>
         <Grid Margin="10,10">
             <Grid.ColumnDefinitions>
@@ -80,7 +85,10 @@
                 Margin="4"
                 Text="{Binding ViewModel.ProjectBranchHash}" />
         </Grid>
-        <Border Background="DimGray" CornerRadius="8">
+        <Border
+            Margin="0,10"
+            Background="DimGray"
+            CornerRadius="8">
             <ScrollViewer
                 x:Name="OutPutScrollViewer"
                 MaxHeight="140"
@@ -95,27 +103,74 @@
 
             </ScrollViewer>
         </Border>
-        <StackPanel Margin="10" Orientation="Horizontal">
-            <Button Click="CleanOutPut">清理输出</Button>
+        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+            <ui:Button Click="CleanOutPut" Content="清理输出">
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="TextClearFormatting24" />
+                </ui:Button.Icon>
+            </ui:Button>
+
+            <ui:Button
+                Margin="10,0"
+                Click="ReleaseAddress"
+                Content="发布地址">
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="GlobeSurface24" />
+                </ui:Button.Icon>
+            </ui:Button>
+
+            <ui:Button Click="ReleaseConfig" Content="配置地址">
+                <ui:Button.Icon>
+                    <ui:SymbolIcon Symbol="Accessibility16" />
+                </ui:Button.Icon>
+            </ui:Button>
+
         </StackPanel>
-        <StackPanel Margin="10" Orientation="Horizontal">
+        <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
             <Label Margin="0,0,10,0" VerticalAlignment="Center">编译配置</Label>
             <ComboBox x:Name="CompildConfigComboBox" SelectedItem="{Binding ViewModel.CompildConfig}">
                 <ComboBoxItem>Debug</ComboBoxItem>
                 <ComboBoxItem>Release</ComboBoxItem>
             </ComboBox>
-            <Label Margin="10,0" VerticalAlignment="Center">打包项目</Label>
+            <Label Margin="10,0,0,0" VerticalAlignment="Center">打包项目</Label>
             <ComboBox
                 x:Name="CompildProjectComboBox"
                 Margin="10,0"
                 SelectedItem="{Binding ViewModel.CompildProject}" />
             <Label VerticalAlignment="Center">版本:</Label>
-            <TextBlock
-                Width="55"
-                Margin="10,10"
+            <TextBox
+                Width="85"
+                Margin="5,10"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Text="{Binding ViewModel.CsprojVersion}" />
+            <ui:Button Command="{Binding ViewModel.EditVersionClickCommand}" Icon="{ui:SymbolIcon ChevronDown24}" />
         </StackPanel>
+        <Grid Margin="0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="9*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <TextBlock>打包地址:</TextBlock>
+            <TextBlock Grid.Column="1" Text="{Binding ViewModel.PackPath}" />
+
+            <TextBlock Grid.Row="1" Margin="0,10">配置地址:</TextBlock>
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0,10"
+                Text="{Binding ViewModel.PackConfigPath}" />
+
+            <TextBlock Grid.Row="2">配置版本:</TextBlock>
+            <TextBlock
+                Grid.Row="2"
+                Grid.Column="1"
+                Text="{Binding ViewModel.PackConfigVersion}" />
+        </Grid>
     </StackPanel>
 </Page>

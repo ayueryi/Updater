@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 using System.Xml;
 
 namespace Updater.Utils
@@ -27,7 +28,7 @@ namespace Updater.Utils
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
-        
+
         public static int CountSubstringOccurrences(string input, string substring)
         {
             return input.Count(i => substring.Contains(i));
@@ -38,10 +39,10 @@ namespace Updater.Utils
             List<string> project_list = new List<string>();
             var psi = new ProcessStartInfo("dotnet", $"sln {sln_path} list") { RedirectStandardOutput = true };
             psi.CreateNoWindow = true;
-            
+
             var proc = Process.Start(psi);
             if (proc == null)
-            { 
+            {
                 Debug.WriteLine("Can not exec.");
             }
             else
@@ -80,6 +81,17 @@ namespace Updater.Utils
                 }
             }
             return null;
+        }
+
+        public static void GetXmlVersion(string content, out string version)
+        {
+            version = string.Empty;
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(content);
+
+            // 选择version元素并获取其文本值
+            XmlNode? versionNode = xmlDoc.SelectSingleNode("/item/version");
+            version = versionNode!.InnerText;
         }
     }
 }
